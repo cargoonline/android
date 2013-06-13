@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_group"
+    android:layout_width="fill_parent"
+    android:layout_height="60dip"
+    android:background="@drawable/semitransparent_group_bg" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp" >
+
+        <TextView
+            android:id="@+id/tv_awb_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:text="@string/awb_no"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_awb"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_flightloc"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/tv_awb_title"
+            android:text="@string/dummy"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_flightloc"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignLeft="@+id/tv_awb_title"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_awb_title"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:text="@string/dummy"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ccd" />
+
+        <TextView
+            android:id="@+id/tv_flightno"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignBaseline="@+id/tv_awb_title"
+            android:layout_alignBottom="@+id/tv_awb_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:text="@string/dummy"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ccd" />
+    </RelativeLayout>
+
+</LinearLayout>

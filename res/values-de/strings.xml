@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources> 
+    <string name="app_name">Cargo Online Mobile</string>
+    <string name="menu_settings">Einstellungen</string>   
+    <string name="title_activity_display">Cargo Online Mobile: Manifest</string>
+    <string name="title_activity_get_manifest_data">Cargo Online Mobile: Warte&#8230;</string>
+    <string name="title_activity_start">Cargo Online Mobile</string>
+   
+    <string name="first_startup">App wird initialisiert. Bitte stellen Sie sicher, dass Sie eine Verbindung zum Internet haben und haben Sie einen Moment Geduld&#8230;</string>
+    
+    <string name="welcome_title">Willkommen bei \nCargo Online Mobile!</string>
+    <string name="welcome_desc">Willkommen, %1$s!\n\nSie sind eingeloggt und können hier ganz einfach Ihre Gestellung durchführen.\n\nKlicken Sie auf \'Start\' und scannen Sie den QR-Code auf Ihrem Truckmanisfest.</string>
+    <string name="welcome_new_user_desc">Willkommen bei Cargo Online Mobile!\n\nHier können Sie ganz einfach Ihre Gestellung durchführen.\n\nKlicken Sie auf \'Start\' und scannen Sie den QR-Code auf Ihrem Truckmanisfest.</string>
+    <string name="welcome_start_scanner">Neuen QR-Code scannen</string>  
+    <string name="welcome_show_last_manifest">Letztes Manifest anzeigen</string>   
+    <string name="welcome_scan_code">Bitte bewegen Sie die Kamera über den QR-Code.</string> 
+    
+    <string name="register_desc">Sie müssen sich erst registrieren, um die App nutzen zu können.</string>
+    <string name="register_desc_waiting">Die Registrierung wird abgeschlossen. Bitte warten&#8230;</string>
+    <string name="register_enter_name">Ihr Name:</string>
+    <string name="register_enter_name_reminder">Bitte geben Sie zuerst Ihren Namen ein!</string>
+    <string name="register_gcm_warning">Verbindung mit dem Google Cloud Messaging Server konnte nicht hergestellt werden. Versuche ohne Registrierung fortzufahren&#8230;</string>
+    <string name="register">Registrieren!</string>
+    
+    <string name="internet_connection_error">Internet Verbindungsfehler</string>
+    <string name="internet_connection_error_desc">Bitte stellen Sie sicher, dass Ihre Internetverbindung funktioniert.</string>
+    <string name="invalid_scan_result_error">Die gescannte Manifest-ID scheint ungültig zu sein. Bitte erneut scannen.</string>
+    <string name="invalid_last_manifest_error">Die gespeicherten Manifestdaten sind ungültig. Bitte scannen Sie einen neuen QR-Code.</string>
+    
+    <string name="scan_fail">Ungültiger QR-Code</string>
+    <string name="scan_fail_desc">Warnung: Der QR-Code konnte nicht gelesen werden oder enthält ungültige Daten. Bitte scannen Sie nur Codes auf Ihrem Manifest.</string>
+    <string name="scan_success">\nQR-Code wurde erfolgreich gescannt!</string>
+    <string name="manifest_id">Manifest ID:</string>
+    <string name="spedition_id">Spedition ID:</string>
+    
+    <string name="please_wait">Bitte warten&#8230;</string>
+    <string name="requesting_data">Ihre Manifestdaten werden von unserem Server geladen. Das kann einige Sekunden dauern.</string>
+    
+    <string name="commit_in_process">Gestellung wird durchgeführt&#8230;</string>
+    
+    <string name="awb_no">AWB-Nr.:</string>
+    <string name="mrn_no">MRN-Nr.:</string>
+    <string name="mrn">MRN:</string>
+    <string name="eori_no">EORI-Nr.:</string>
+    <string name="spedition">Spediteur:</string>
+    <string name="flight_no">Flugnr.:</string>
+    <string name="flight_location">Ladeort:</string>
+    <string name="gestellen">Gestellen und Qualifizieren</string>
+    <string name="check_state">Status aktualisieren</string>
+    <string name="mrn_details">Details zu MRN Position</string>
+    <string name="state">Status:</string>
+    
+    <string name="dummy">xxx</string>
+    <string name="none"></string>
+      
+    <string name="error_config">Please set the %1$s constant and recompile the app.</string>
+    <string name="already_registered">Ihr Gerät ist bereits registriert.</string>
+    <string name="gcm_registered">Sie wurden erfolgreich für Google Push registriert!</string>
+    <string name="gcm_unregistered">Sie wurden erfolgreich bei Google Push abgemeldet!</string>
+    <string name="gcm_message">GCM: Nachricht erhalten!</string>
+    <string name="gcm_error">GCM: Fehler (%1$s).</string>
+    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">GCM: server deleted %1$d pending messages!</string>
+    <string name="server_registering">Versuch %1$d/%2$d: Registriere Gerät bei Web-EXT&#8230;</string>
+    <string name="server_registered">Sie wurden erfolgreich bei Web-EXT registriert!</string>
+    <string name="server_unregistered">Sie wurden erfolgreich von Web-EXT abgemeldet!</string>
+    <string name="server_register_error">Registrierung bei Web-EXT konnte nach %1$d Versuchen leider nicht durchgeführt werden.</string>
+    <string name="server_unregister_error">Sie konnten leider nicht vom Web-EXT System abgemeldet werden (%1$s).</string>
+    <string name="options_register">Registrieren</string>
+    <string name="options_unregister">Abmelden</string>
+    <string name="options_clear">Löschen</string>
+    <string name="options_exit">Ende</string> 
+    
+    <string name="state11">Webauftrag "EXTPRE (Gestellungsanzeige) senden" erstellt</string>
+    <string name="state12">Webauftrag "EXTPRE senden" vom Spediteur empfangen</string>
+    <string name="state13">Webauftrag "EXTPRE senden" an Zoll gesendet. Warten auf EXTDAT</string>
+    <string name="state14">EXTDAT vom Zoll erhalten</string>
+    <string name="state21">Webauftrag "EXTINF senden" erstellt</string>
+    <string name="state22">Webauftrag "EXTINF senden" vom Spediteur empfangen</string>
+    <string name="state23">Webauftrag "EXTINF senden" an Zoll gesendet. Warten auf Ausgangsfreigabe.</string>
+    <string name="state24">Ausgangsfreigabe vom Zoll erhalten</string>
+    <string name="state25">EXTCTL Kontrolle vom Zoll erhalten. Warten auf wiederfreigabe</string>
+    <string name="state26">Wiederfreigabe auf Kontrolle erhalten</string>
+    <string name="state27">ABBRUCH vom Zoll erhalten. MRN ist frei und kann neu gestellt werden.</string>
+    <string name="state31">Webauftrag "ABBRUCH senden" erstellt</string>
+    <string name="state32">Webauftrag "ABBRUCH senden" vom Spediteur empfangen</string>
+    <string name="state33">Webauftrag "ABBRUCH senden" an Zoll gesendet. Warten auf Bestätigung Abbruch</string>
+     
+</resources>
