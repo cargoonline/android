@@ -2,9 +2,8 @@ package de.cargoonline.mobile.rest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map; 
-import de.cargoonline.mobile.RegisterActivity.RegisterReceiver;
-import de.cargoonline.mobile.uiutils.CommonIntents;
 
+import de.cargoonline.mobile.uiutils.CommonIntents; 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.IntentService;
@@ -18,20 +17,20 @@ public class RegistrationService extends IntentService {
 
 	public static final String TAG = "CO RegistrationService";
 
-
 	private SharedPreferences prefs;
 		
 	public RegistrationService() { 
 		super("RegistrationService");
-	} 
-	 
+	}  
 
 	@Override
 	protected void onHandleIntent(Intent intent) {	
+
+    	Log.d(TAG, "WEB-EXT Registration Service Started...");
 		prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
 
 		Intent broadcastIntent = new Intent();
-		broadcastIntent.setAction(RegisterReceiver.ACTION_REGISTER);
+		broadcastIntent.setAction(COServiceReceiver.ACTION_REGISTER);
 		broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
 		
 		try {
@@ -43,15 +42,22 @@ public class RegistrationService extends IntentService {
 				else autoRegister(); 
 			}
 		} catch (IOException e) {
-			broadcastIntent.putExtra(WebExtClient.KEY_NO_CONNECTION, true);
+			broadcastIntent.putExtra(WebExtClient.KEY_NO_CONNECTION, true);			
 		}
 		
+		String manifestId = intent.getStringExtra(WebExtClient.KEY_MANIFEST_ID);
+		if (manifestId != null && !manifestId.equals("")) {
+			broadcastIntent.putExtra(WebExtClient.KEY_MANIFEST_ID, manifestId);
+			broadcastIntent.putExtra(WebExtClient.KEY_MANIFEST_PWD, intent.getStringExtra(WebExtClient.KEY_MANIFEST_PWD));
+			broadcastIntent.putExtra(WebExtClient.KEY_SPEDITION_ID, intent.getStringExtra(WebExtClient.KEY_SPEDITION_ID));
+		}
 		sendBroadcast(broadcastIntent);		
 	}
 	    
     public boolean isRegistered() throws IOException { 
     	String regId = prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
     	String user = prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
+    	String email = prefs.getString(ServerUtilities.PROPERTY_USER_GOOGLEMAIL, "");
     	if (regId.equals("") || user.equals("")) return false; 
     	
         long backoff = ServerUtilities.BACKOFF_MILLI_SECONDS + ServerUtilities.random.nextInt(1000);
@@ -63,6 +69,7 @@ public class RegistrationService extends IntentService {
 		        Map<String,String> params = new HashMap<String,String>();
 		        params.put(WebExtClient.KEY_REQUEST, WebExtClient.KEY_MOBILE_IS_REGISTERED); 
 		        params.put(ServerUtilities.PROPERTY_REG_ID, regId);
+		        params.put(ServerUtilities.PROPERTY_USER_GOOGLEMAIL, email);
 		        
 	 			String result = ServerUtilities.get(WebExtClient.getInstance(this).getMobileUserRestService(), params);
 	 			if (result == null || result.equals("")) return false; 

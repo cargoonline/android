@@ -37,6 +37,7 @@
     <string name="requesting_data">Ihre Manifestdaten werden von unserem Server geladen. Das kann einige Sekunden dauern.</string>
     
     <string name="commit_in_process">Gestellung wird durchgeführt&#8230;</string>
+    <string name="reloading_data">Aktualisiere Manifest-Status&#8230;</string>
     
     <string name="awb_no">AWB-Nr.:</string>
     <string name="mrn_no">MRN-Nr.:</string>

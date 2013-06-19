@@ -36,6 +36,7 @@
     <string name="requesting_data">Now requesting manifest data from WEB-EXT server. This may take a few seconds.</string>
     
     <string name="commit_in_process">Executing presentation to customs&#8230;</string>
+    <string name="reloading_data">Reloading manifest status&#8230;</string>
     
     <string name="awb_no">AWB-No.:</string>
     <string name="mrn_no">MRN-No.:</string>

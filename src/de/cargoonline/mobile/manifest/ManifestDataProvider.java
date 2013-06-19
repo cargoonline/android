@@ -1,8 +1,8 @@
 package de.cargoonline.mobile.manifest;
 
 import java.util.ArrayList;
-
-import de.cargoonline.mobile.GetManifestDataActivity;
+ 
+import de.cargoonline.mobile.rest.ManifestDataService;
 import de.cargoonline.mobile.rest.WebExtClient;
 
 import android.os.Bundle;
@@ -31,15 +31,15 @@ public class ManifestDataProvider {
     	if (bundle == null) return null;
 
     	manifestId = bundle.getString(WebExtClient.KEY_MANIFEST_ID);
-    	speditionName = bundle.getString(GetManifestDataActivity.KEY_SPEDITION_NAME);
+    	speditionName = bundle.getString(ManifestDataService.KEY_SPEDITION_NAME);
     	speditionId = bundle.getString(WebExtClient.KEY_SPEDITION_ID);
-    	eoriNo = bundle.getStringArray(GetManifestDataActivity.KEY_EORI_NO[0])[0];
+    	eoriNo = bundle.getStringArray(ManifestDataService.KEY_EORI_NO[0])[0];
     	       
-    	String[] mrnNumbers = bundle.getStringArray(GetManifestDataActivity.KEY_MRN_NO);
-        String[] awbNumbers = bundle.getStringArray(GetManifestDataActivity.KEY_AWB_NO[1]);
-        String[] flightNumbers = bundle.getStringArray(GetManifestDataActivity.KEY_FLIGHT_NO);
-        String[] flightLocations = bundle.getStringArray(GetManifestDataActivity.KEY_FLIGHT_LOCATION);
-        String[] status = bundle.getStringArray(GetManifestDataActivity.KEY_STATUS);
+    	String[] mrnNumbers = bundle.getStringArray(ManifestDataService.KEY_MRN_NO);
+        String[] awbNumbers = bundle.getStringArray(ManifestDataService.KEY_AWB_NO[1]);
+        String[] flightNumbers = bundle.getStringArray(ManifestDataService.KEY_FLIGHT_NO);
+        String[] flightLocations = bundle.getStringArray(ManifestDataService.KEY_FLIGHT_LOCATION);
+        String[] status = bundle.getStringArray(ManifestDataService.KEY_STATUS);
 
      	awbGroups = new ArrayList<String>();
         awbGroupInfos = new ArrayList<ManifestItem>();

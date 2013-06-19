@@ -2,7 +2,6 @@ package de.cargoonline.mobile.manifest;
 
 import java.util.ArrayList;
 
-import de.cargoonline.mobile.DisplayActivity;
 import de.cargoonline.mobile.R;
 import de.cargoonline.mobile.uiutils.AlertDialogManager;
 import android.content.Context;
@@ -28,7 +27,7 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 	private ArrayList<ManifestItem> awbGroupInfos;
 	private ArrayList<String> awbGroups;
     private AlertDialogManager alert;
-    private ArrayList<ManifestMRNPosition> selectedFreeMrns;
+    private ArrayList<String> selectedFreeMrns;
     private DisplayActivity activity;
 
 	public ManifestListAdapter(Context c, ArrayList<String> groups, ArrayList<ManifestItem> groupInfos, ArrayList<ArrayList<ManifestItem>> positions) {
@@ -38,7 +37,7 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 		awbGroupInfos = groupInfos;
 		mrnPositions = positions; 
 		alert = new AlertDialogManager(c);
-		selectedFreeMrns = new ArrayList<ManifestMRNPosition>();
+		selectedFreeMrns = new ArrayList<String>();
 	}
 	
     @Override
@@ -81,7 +80,7 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 	            }  
 	        }); 
     	} else {  
-    		selectedFreeMrns.add(mrnItem); 
+    		selectedFreeMrns.add(mrnItem.getMrnNumber()); 
     		cb.setVisibility(View.VISIBLE);
     		cb.setTag(mrnItem);
     		cb.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
@@ -89,9 +88,8 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					 try {
 						 ManifestMRNPosition mrnItem = (ManifestMRNPosition) buttonView.getTag();
-						 if (isChecked) selectedFreeMrns.add(mrnItem);
-						 else selectedFreeMrns.remove(mrnItem); 
-						 
+						 if (isChecked) selectedFreeMrns.add(mrnItem.getMrnNumber());
+						 else selectedFreeMrns.remove(mrnItem.getMrnNumber());  
 						 activity.checkButtonState();
 					 } catch (Exception e) {
 						 Log.e(TAG, "error: unable to check free mrn!");
@@ -99,8 +97,8 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 					
 				}});
     		iv.setVisibility(View.GONE); 
-    		
     	}  
+		activity.checkButtonState();
         return convertView;
     }
    
@@ -197,7 +195,7 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
         return true;
     } 
     
-    public ArrayList<ManifestMRNPosition> getSelectedPositions() {
+    public ArrayList<String> getSelectedPositions() {
     	return selectedFreeMrns;
     } 
   

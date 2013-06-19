@@ -106,19 +106,48 @@
 	    android:textIsSelectable="true" />
 	
 	</LinearLayout>
-   
 
+	<LinearLayout
+	    android:id="@+id/manifest_waiting"
+	    android:layout_width="fill_parent"
+	    android:layout_height="77dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_weight="0.42"
+	    android:orientation="horizontal" >
+
+	    <ProgressBar
+	        android:id="@+id/progressBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical" />
+
+	    <TextView
+	        android:id="@+id/manifest_waiting_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:gravity="center_vertical"
+	        android:padding="10dp"
+	        android:text="@string/commit_in_process"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textColor="#FFFFFF"
+	        android:textIsSelectable="true"
+	        android:textStyle="bold" />
+	</LinearLayout>
+   
     <ExpandableListView
         android:id="@+id/manifest_list"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.74"
-        android:scrollbars="none" >
+        android:scrollbars="none"
+        android:visibility="gone" >
 
     </ExpandableListView> 
    
     <Button
-        android:id="@+id/showLastManifestButton"
+        android:id="@+id/submitButton"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:background="@drawable/button_bg_pressed"

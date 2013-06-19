@@ -34,7 +34,7 @@ public class AlertDialogManager {
         // Setting alert dialog icon 
         if (statusImg != null)
         	alertDialog.setIcon(alertDialog.getContext().getResources().getDrawable(statusImg));        
-     
+        	onOk(null);
         
  
         // Showing Alert Message
