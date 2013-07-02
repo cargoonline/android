@@ -11,6 +11,10 @@ public class ManifestMRNPosition extends ManifestItem {
 	public final static int CLOSED_STATE = 36;
 	public final static int MAX_FREE_STATE = 10;
 	public final static int MIN_STATE = 36;
+
+	private int status;
+	private String mrnNumber; 
+	private String mrnDetails;
 	
 	public final static HashMap<Integer,Integer> GREEN_STATES = new HashMap<Integer,Integer>() {
 		{	     
@@ -37,12 +41,8 @@ public class ManifestMRNPosition extends ManifestItem {
 			put(25, R.string.state25);   
 		}
      };  
- 	  
-     
-	private int status;
-	private String mrnNumber;  
-	
-	public ManifestMRNPosition(String awbNumber, String state, String mrn)  { 
+ 	   
+	public ManifestMRNPosition(String awbNumber, String state, String mrn, String details)  { 
 		super(awbNumber);
 		try {
 			status = Integer.parseInt(state);
@@ -50,7 +50,8 @@ public class ManifestMRNPosition extends ManifestItem {
 		} catch (Exception e) {
 			status = FREE_STATE;
 		}
-		mrnNumber = mrn; 
+		mrnNumber = mrn;
+		mrnDetails = details;
 	}
 	
 	public int getStatus() {
@@ -67,7 +68,7 @@ public class ManifestMRNPosition extends ManifestItem {
 		if (YELLOW_STATES.containsKey(status)) return R.drawable.pending;
 		if (RED_STATES.containsKey(status)) return R.drawable.fail; 
 		if (status > MAX_FREE_STATE) return  R.drawable.fail; // unknown state
-		return null; // free MRN 
+		return -1; // free MRN 
 	}
 	
 	public Integer getStatusImg() {
@@ -75,19 +76,20 @@ public class ManifestMRNPosition extends ManifestItem {
 		if (YELLOW_STATES.containsKey(status)) return R.drawable.yellow;
 		if (RED_STATES.containsKey(status)) return R.drawable.red; 
 		if (status > MAX_FREE_STATE) return  R.drawable.red; // unknown state				
-		return null; // free MRN 
+		return -1; // free MRN 
 	} 
 	
-	public Integer getStatusDetails() {
+	public Integer getDefaultStatusDetails() {
 		if (GREEN_STATES.containsKey(status) || status >= CLOSED_STATE) return GREEN_STATES.get(status);
 		if (YELLOW_STATES.containsKey(status)) return YELLOW_STATES.get(status);
-		if (RED_STATES.containsKey(status)) return RED_STATES.get(status); // TODO: fehler infos!
-		
-		if (status > MAX_FREE_STATE) return 0; // unknown state
-		// TODO: fehler infos!
-					
-		return null; // free MRN 
+		if (RED_STATES.containsKey(status)) return RED_STATES.get(status);  
+		if (status > MAX_FREE_STATE) return 0; // unknown state 
+		return -1; // free MRN 
 	} 
+	
+	public String getMrnDetailsFromServer() {
+		return mrnDetails;
+	}
 	
 	public String getMrnNumber() {
 		return mrnNumber;

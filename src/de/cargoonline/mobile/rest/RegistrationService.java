@@ -3,31 +3,29 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map; 
 
-import de.cargoonline.mobile.uiutils.CommonIntents; 
+import de.cargoonline.mobile.MainMenuActivity;
+ 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.IntentService;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.Intent; 
+import android.content.SharedPreferences.Editor;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class RegistrationService extends IntentService {
 
-	public static final String TAG = "CO RegistrationService";
-
-	private SharedPreferences prefs;
+	public static final String TAG = "CO RegistrationService"; 
 		
 	public RegistrationService() { 
-		super("RegistrationService");
+		super("RegistrationService"); 
 	}  
 
 	@Override
 	protected void onHandleIntent(Intent intent) {	
-
-    	Log.d(TAG, "WEB-EXT Registration Service Started...");
-		prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
+		 
+    	Log.d(TAG, "WEB-EXT Registration Service Started..."); 
 
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction(COServiceReceiver.ACTION_REGISTER);
@@ -55,9 +53,9 @@ public class RegistrationService extends IntentService {
 	}
 	    
     public boolean isRegistered() throws IOException { 
-    	String regId = prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
-    	String user = prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
-    	String email = prefs.getString(ServerUtilities.PROPERTY_USER_GOOGLEMAIL, "");
+    	String regId = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
+    	String user = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
+    	String email = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_USER_GOOGLEMAIL, "");
     	if (regId.equals("") || user.equals("")) return false; 
     	
         long backoff = ServerUtilities.BACKOFF_MILLI_SECONDS + ServerUtilities.random.nextInt(1000);
@@ -101,8 +99,8 @@ public class RegistrationService extends IntentService {
     }  
 
     public boolean autoRegister() {
-    	final String userName = prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
-    	final String regid =  prefs.getString(ServerUtilities.PROPERTY_REG_ID, ""); 
+    	final String userName = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
+    	final String regid =  MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_REG_ID, ""); 
     	if (userName.equals("") || regid.equals("")) return false;
     	
     	return autoRegister(userName, regid);
@@ -127,10 +125,10 @@ public class RegistrationService extends IntentService {
      } 
        
     private void saveUserPreferences(String userName, String gMailAccount, String phoneNo) {
-    	String regid = prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
+    	String regid = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
     	
     	// Save the regid for future use (if not already done) - no need to register again.
-        SharedPreferences.Editor editor = prefs.edit();
+        Editor editor = MainMenuActivity.prefs.edit();
         if (!regid.equals("")) editor.putString(ServerUtilities.PROPERTY_REG_ID, regid);
         
         // also save user name, gmail, phone

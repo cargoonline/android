@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources> 
+<resources>
+
     <string name="app_name">Cargo Online Mobile</string>
-    <string name="menu_settings">Settings</string>   
+    <string name="version_name">Version 1.0</string>
+    <string name="ust_id">DE 159510182</string>
+    <string name="company">Cargo Online Software GmbH\nKurt-Schumacher-Allee 2\nD-28329 Bremen</string>
+    <string name="website">http://www.cargo-software.de/</string>
+    <string name="ust_id_title">USt-ID-Nr:</string>
+    <string name="menu_settings">Settings</string>
     <string name="title_activity_display">Cargo Online Mobile: Manifest</string>
     <string name="title_activity_get_manifest_data">Cargo Online Mobile: Waiting&#8230;</string>
     <string name="title_activity_start">Cargo Online Mobile</string>
-   
     <string name="first_startup">App will be initialized. Please make sure to be connected to the internet and be patient&#8230;</string>
-    
     <string name="welcome_title">Welcome to \nCargo Online Mobile!</string>
     <string name="welcome_desc">Welcome, %1$s!\n\nYou are logged in and can use this app for your presentation to customs.\n\nClick on the button below to start and scan the QR code on your truck manifest.</string>
     <string name="welcome_new_user_desc">Welcome to Cargo Online Mobile!\n\nYou can use this app for your presentation to customs.\n\nClick on the button below to start and scan the QR code on your truck manifest.</string>
     <string name="welcome_start_scanner">Scan QR Code</string>
-    <string name="welcome_show_last_manifest">Show last manifest</string>    
-    <string name="welcome_scan_code">Please scan your manifest QR Code now.</string> 
+    <string name="welcome_show_last_manifest">Show last manifest</string>
+    <string name="welcome_scan_code">Please scan your manifest QR Code now.</string>
     <string name="register_desc">In order to use this tool, you have to register your app first.</string>
     <string name="register_desc_waiting">Please wait for the registration to be completed&#8230;</string>
     <string name="register_enter_name">Enter your name:</string>
     <string name="register_enter_name_reminder">Please enter your name first!</string>
     <string name="register_gcm_warning">Unable to Contact Google Cloud Messaging Server. Trying to continue without registration.</string>
     <string name="register">Register!</string>
-    
     <string name="internet_connection_error">Internet Connection Error</string>
     <string name="internet_connection_error_desc">Please connect to working Internet connection</string>
+    <string name="user_input_error">Input Error</string>
+    <string name="user_input_error_desc">Please fill out all form fields correctly!</string>
     <string name="invalid_scan_result_error">The scanned Manifest ID on the QR-Code is invalid. Please try again.</string>
     <string name="invalid_last_manifest_error">There is no valid manifest data saved in this application. Please scan a new QR code.</string>
-    
     <string name="scan_fail">Invalid QR code</string>
     <string name="scan_fail_desc">Warning: Invalid or unreadable data on QR code! Please scan a valid manifest code!</string>
     <string name="scan_success">Success: \nQR code scanned!</string>
     <string name="manifest_id">Manifest ID:</string>
     <string name="spedition_id">Spedition ID:</string>
-    
     <string name="please_wait">Please wait&#8230;</string>
-    <string name="requesting_data">Now requesting manifest data from WEB-EXT server. This may take a few seconds.</string>
-    
+    <string name="requesting_data">Now loading manifest. This may take a few seconds.</string>
     <string name="commit_in_process">Executing presentation to customs&#8230;</string>
     <string name="reloading_data">Reloading manifest status&#8230;</string>
-    
+    <string name="updating_flight_data">Updating flight data&#8230;</string>
     <string name="awb_no">AWB-No.:</string>
     <string name="mrn_no">MRN-No.:</string>
-    <string name="mrn">MRN:</string>
+    <string name="awb">AWB</string>
+    <string name="mrn">MRN</string>
     <string name="eori_no">EORI-No.:</string>
     <string name="spedition">Spedition:</string>
     <string name="flight_no">Flight No.:</string>
     <string name="flight_location">Point of Load:</string>
     <string name="gestellen">Presentation to customs</string>
-    <string name="check_state">Refresh State</string>    
-    <string name="mrn_details">Details for MRN position</string>
+    <string name="check_state">Refresh State</string>
+    <string name="mrn_details">MRN</string>
     <string name="state">State:</string>
-    
     <string name="dummy">xxx</string>
     <string name="none"></string>
-      
     <string name="error_config">Please set the %1$s constant and recompile the app.</string>
     <string name="already_registered">Device is already registered on server.</string>
     <string name="gcm_registered">From GCM: device successfully registered!</string>
@@ -69,8 +70,13 @@
     <string name="options_register">Register</string>
     <string name="options_unregister">Unregister</string>
     <string name="options_clear">Clear</string>
-    <string name="options_exit">Exit</string> 
+    <string name="options_exit">Exit</string>
+    <string name="options_about">About&#8230;</string>
+    <string name="options_manifest">Manifest</string>
+    <string name="about_dialog_text"></string>
     
+    <string name="edit_flight_title">Edit Flight</string>
+    <string name="edit_flight_submit_title">Save Changes</string>
     
     <string name="state11">Request "send EXTPRE" created.</string>
     <string name="state12">Request "send EXTPRE" received from spedition.</string>
@@ -86,5 +92,7 @@
     <string name="state31">Request "send CANCEL" created.</string>
     <string name="state32">Request "send CANCEL" received from spedition.</string>
     <string name="state33">Request "send CANCEL" sent to customs. Waiting for affirmation.</string>
-    
-    </resources>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="action_settings">Settings</string> 
+
+</resources>

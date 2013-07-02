@@ -6,15 +6,14 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
+import android.content.Intent; 
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gcm.GCMBaseIntentService; 
 
 import de.cargoonline.mobile.push.CommonUtilities;
-import de.cargoonline.mobile.rest.ServerUtilities;
-import de.cargoonline.mobile.uiutils.CommonIntents;
+import de.cargoonline.mobile.rest.ServerUtilities; 
 
 public class GCMIntentService extends GCMBaseIntentService {
  
@@ -38,7 +37,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         displayMessage(context, "Your device registred with GCM");
 
         Editor prefEdit = getSharedPreferences(
-        		CommonIntents.PREF_STORE, Context.MODE_PRIVATE).edit();
+        		MainMenuActivity.PREF_STORE, Context.MODE_PRIVATE).edit();
         
         prefEdit.putString(ServerUtilities.PROPERTY_REG_ID, registrationId);
         prefEdit.commit();
@@ -96,7 +95,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         displayMessage(context, getString(R.string.gcm_recoverable_error,
                 errorId));
         return super.onRecoverableError(context, errorId);
-    }
+    } 
  
     /**
      * Issues a notification to inform the user that server has sent a message.

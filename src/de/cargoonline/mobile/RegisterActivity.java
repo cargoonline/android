@@ -4,9 +4,7 @@ import com.google.android.gcm.GCMRegistrar;
 
 import de.cargoonline.mobile.camera.QRScanActivity; 
 import de.cargoonline.mobile.rest.COServiceReceiver;
-import de.cargoonline.mobile.rest.WebExtClient;
-import de.cargoonline.mobile.uiutils.CommonIntents;
-import android.app.Activity;
+import de.cargoonline.mobile.rest.WebExtClient; 
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends MainMenuActivity {
 	
     private static String TAG = "CO RegisterActivity";
     private EditText nameEdit; 
@@ -111,8 +109,7 @@ public class RegisterActivity extends Activity {
 				
 				} else if (regid.equals("")) { 
 					Toast.makeText(ctx, R.string.register_gcm_warning, Toast.LENGTH_LONG).show(); 
-
-					CommonIntents.startManifestActivity(ctx,
+					startManifestActivity(
 			 			 manifestBundle.getString(WebExtClient.KEY_MANIFEST_ID),
 			 			 manifestBundle.getString(WebExtClient.KEY_SPEDITION_ID),
 			 			 manifestBundle.getString(WebExtClient.KEY_MANIFEST_PWD));
@@ -122,7 +119,7 @@ public class RegisterActivity extends Activity {
 					String manifestId = manifestBundle.getString(WebExtClient.KEY_MANIFEST_ID);
 				 	String speditionId = manifestBundle.getString(WebExtClient.KEY_SPEDITION_ID);
 				 	String manifestPwd = manifestBundle.getString(WebExtClient.KEY_MANIFEST_PWD);
-					CommonIntents.startRegistrationService(ctx, userName, regid, manifestId, speditionId, manifestPwd);
+					startRegistrationService(userName, regid, manifestId, speditionId, manifestPwd);
 				} 
 		        startButton.setBackgroundResource(R.drawable.button_bg_pressed);				
     		}

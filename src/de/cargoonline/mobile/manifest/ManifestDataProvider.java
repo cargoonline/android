@@ -13,7 +13,7 @@ public class ManifestDataProvider {
 	private ArrayList<ArrayList<ManifestItem>> mrnPositions; 
 	private ArrayList<ManifestItem> awbGroupInfos; 
 	private ArrayList<String> awbGroups;
-	private String eoriNo;
+	private String eoriNo; 
 	private String manifestId;
 	private String speditionId;
 	private String speditionName;
@@ -40,6 +40,7 @@ public class ManifestDataProvider {
         String[] flightNumbers = bundle.getStringArray(ManifestDataService.KEY_FLIGHT_NO);
         String[] flightLocations = bundle.getStringArray(ManifestDataService.KEY_FLIGHT_LOCATION);
         String[] status = bundle.getStringArray(ManifestDataService.KEY_STATUS);
+        String[] detailTxts = bundle.getStringArray(ManifestDataService.KEY_DETAIL_TEXT);
 
      	awbGroups = new ArrayList<String>();
         awbGroupInfos = new ArrayList<ManifestItem>();
@@ -47,7 +48,7 @@ public class ManifestDataProvider {
         
         for (int i=0; i < mrnNumbers.length; i++) {
         	
-        	ManifestItem newMRN = new ManifestMRNPosition(awbNumbers[i], status[i], mrnNumbers[i]);
+        	ManifestItem newMRN = new ManifestMRNPosition(awbNumbers[i], status[i], mrnNumbers[i], detailTxts[i]);
         	
         	if (!awbGroups.contains(awbNumbers[i])) {
         		awbGroups.add(awbNumbers[i]);

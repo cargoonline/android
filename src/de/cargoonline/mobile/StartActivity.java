@@ -1,20 +1,15 @@
 package de.cargoonline.mobile; 
-
-import de.cargoonline.mobile.camera.QRScanActivity;
+ 
 import de.cargoonline.mobile.push.CommonUtilities;
 import de.cargoonline.mobile.push.ConnectionDetector;
 import de.cargoonline.mobile.rest.ServerUtilities; 
-import de.cargoonline.mobile.rest.WebExtClient;
-import de.cargoonline.mobile.uiutils.CommonIntents;
+import de.cargoonline.mobile.rest.WebExtClient; 
 import de.cargoonline.mobile.uiutils.WakeLocker;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+import android.content.IntentFilter; 
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View; 
@@ -28,11 +23,10 @@ import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
 
-public class StartActivity extends Activity {
-
-	private static boolean DEBUG_UNREGISTER_ME = false;
-	private static boolean DEBUG_DEVICE_WITHOUT_REGISTRATION = false;
-    
+public class StartActivity extends MainMenuActivity {
+ 
+	private static boolean DEBUG_DEVICE_WITHOUT_REGISTRATION = false; 
+	
     static { System.loadLibrary("iconv");  } 
 
     private static String TAG = "CO StartActivity";
@@ -41,7 +35,6 @@ public class StartActivity extends Activity {
     private Button startButton; 
     private Button showLastManifestButton; 
     private EditText nameEdit; 
-    private SharedPreferences prefs;
     private String regId;  
     private String user;  
     
@@ -76,14 +69,13 @@ public class StartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);                
-
-    	prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
+ 
         user = prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");
         
         cd = new ConnectionDetector(getApplicationContext());
         if (!cd.isConnectingToInternet()) {
             // Internet Connection is not available
-        	  CommonIntents.warnInternetConnection(StartActivity.this);
+        	  warnInternetConnection();
         }
         
         setContentView(R.layout.activity_start); 
@@ -93,16 +85,8 @@ public class StartActivity extends Activity {
         	&& !DEBUG_DEVICE_WITHOUT_REGISTRATION) { 
 
             // Requirements for GCM registrations fulfilled
-        	registerReceiver(mHandleMessageReceiver, new IntentFilter(CommonUtilities.DISPLAY_MESSAGE_ACTION));
+        	registerReceiver(mHandleMessageReceiver, new IntentFilter(CommonUtilities.DISPLAY_MESSAGE_ACTION)); 
         	 
-        	// for debugging purposes (enable unregister from GCM/Prefs)
-            if (DEBUG_UNREGISTER_ME) {            
-            	GCMRegistrar.unregister(this);            	
-            	Editor e = prefs.edit();
-            	e.clear(); 
-            	e.commit();
-            	return;
-        	}
         	
             // Make sure the device has the proper dependencies & manifest was properly set
             GCMRegistrar.checkDevice(this);       
@@ -124,13 +108,7 @@ public class StartActivity extends Activity {
     	}  
         setWelcomeLayout();
     }
-    
-    public void setRegId(String id) {
-    	this.regId = id;
-    	Editor editor = prefs.edit();
-    	editor.putString(ServerUtilities.PROPERTY_REG_ID, id);
-    	editor.commit();
-    }
+
     
     @Override
     public void onBackPressed() { 
@@ -142,7 +120,16 @@ public class StartActivity extends Activity {
         return;
     }    
   
-    
+    @Override
+    protected void onDestroy() { 
+        try {
+            unregisterReceiver(mHandleMessageReceiver);
+            GCMRegistrar.onDestroy(this);
+        } catch (Exception e) {
+             Log.d("UnRegister Receiver Error", "> " + e.getMessage());
+        }
+        super.onDestroy();
+    }
     private void setWelcomeLayout() {
     	TextView tv1 = (TextView)findViewById(R.id.yourname_tv);
     	tv1.setVisibility(View.INVISIBLE);
@@ -172,11 +159,8 @@ public class StartActivity extends Activity {
         });
         startButton.setOnClickListener(new OnClickListener() {    		
     		@Override
-			public void onClick(View v) {  
-    			Context c = v.getContext();
-    			Intent i = new Intent(c, QRScanActivity.class); 
-    			c.startActivity(i);
-    			   
+			public void onClick(View v) {       			
+    			startScanner();
     			startButton.setBackgroundResource(R.drawable.button_bg_pressed);
 			}
         });
@@ -206,34 +190,16 @@ public class StartActivity extends Activity {
     } 
    
      
-    private boolean hasSavedManifestData() {
-    	SharedPreferences prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);     	
+    private boolean hasSavedManifestData() { 	
     	return (prefs.contains(WebExtClient.KEY_MANIFEST_ID) &&
     			prefs.contains(WebExtClient.KEY_MANIFEST_PWD) &&
     			prefs.contains(WebExtClient.KEY_SPEDITION_ID));
-    }
+    } 
     
-    private boolean loadSavedManifestData() {
-    	SharedPreferences prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
- 		
-		String lastManifestId = prefs.getString(WebExtClient.KEY_MANIFEST_ID, "");
-		String lastSpedId = prefs.getString(WebExtClient.KEY_SPEDITION_ID, "");
-		String lastManifestPwd = prefs.getString(WebExtClient.KEY_MANIFEST_PWD, "");
-		if (!lastManifestId.equals("") && !lastSpedId.equals("") && !lastManifestPwd.equals("")) {
-			CommonIntents.startManifestActivity(this, lastManifestId, lastSpedId, lastManifestPwd); 
-			return true;
-		} else 
-			return false;
-    }
+   
     
-    @Override
-    protected void onDestroy() { 
-        try {
-            unregisterReceiver(mHandleMessageReceiver);
-            GCMRegistrar.onDestroy(this);
-        } catch (Exception e) {
-           // Log.e("UnRegister Receiver Error", "> " + e.getMessage());
-        }
-        super.onDestroy();
-    }
+    public void setRegId(String id) {
+    	this.regId = id;
+    	super.setRegId(id);
+    }  
 }

@@ -1,13 +1,11 @@
- 
 package de.cargoonline.mobile.camera;
 
-import de.cargoonline.mobile.GetManifestDataActivity;
+import de.cargoonline.mobile.MainMenuActivity;
 import de.cargoonline.mobile.R;  
 import de.cargoonline.mobile.StartActivity;
+import de.cargoonline.mobile.manifest.GetManifestDataActivity;
 import de.cargoonline.mobile.rest.WebExtClient;
 import de.cargoonline.mobile.uiutils.AlertDialogManager;  
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;  
@@ -16,6 +14,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler; 
+import android.view.Menu;
+import android.view.MenuItem; 
 import android.widget.FrameLayout; 
 import android.widget.Toast;
 import android.hardware.Camera;
@@ -30,7 +30,7 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 import net.sourceforge.zbar.Config;
 
-public class QRScanActivity extends Activity { 
+public class QRScanActivity extends MainMenuActivity { 
 	
     private Camera mCamera;
     private CameraPreview mPreview;
@@ -102,8 +102,16 @@ public class QRScanActivity extends Activity {
         });
     }
     
-
     @Override
+	 public boolean onCreateOptionsMenu(Menu menu) { 
+    	super.onCreateOptionsMenu(menu);
+    	MenuItem scannerItem = menu.findItem(R.id.menu_scan);
+    	scannerItem.setVisible(false);
+    	scannerItem.setEnabled(false);
+        return true;
+	 } 
+
+	@Override
     public void onBackPressed() { 
     	releaseCamera();
     	Intent i = new Intent(getApplicationContext(), StartActivity.class);

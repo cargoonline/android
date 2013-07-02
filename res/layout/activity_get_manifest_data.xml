@@ -1,119 +1,124 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bg"
+    android:orientation="vertical"
     tools:context=".GetManifestDataActivity" >
 
     <TextView
         android:id="@+id/tvScanSuccess"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/list_group_semi"
         android:drawableLeft="@drawable/ic_launcher"
         android:drawablePadding="15dp"
         android:drawableRight="@drawable/dbh_s"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/scan_success"
+        android:text="@string/please_wait"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#235"
-        android:textSize="16sp" />
-
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvSoapDesc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/button_bg" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/manifestIdLabelTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/manifest_id"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#dde" />
-
-            <TextView
-                android:id="@+id/manifestIdTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/dummy"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#dde"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/speditionIdLabelTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/spedition_id"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#dde" />
-
-            <TextView
-                android:id="@+id/speditionIdTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/dummy"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#dde"
-                android:textStyle="bold" />
-        </TableRow>
-    </TableLayout>
-
-    <TextView
-        android:id="@+id/tvPleaseWait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tableLayout1"
-        android:layout_below="@+id/tvScanSuccess"
-        android:layout_marginTop="82dp"
-        android:text="@string/please_wait"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#dde"
+        android:textSize="14sp" 
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvSoapDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvPleaseWait"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
-        android:text="@string/requesting_data"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#dde" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/firststart_pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tableLayout1"
-        android:layout_below="@+id/tvScanSuccess"
-        android:layout_marginTop="70dp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="0.5" >
 
-</RelativeLayout>
+            <ProgressBar
+                android:id="@+id/firststart_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tvPleaseWait"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:text="@string/requesting_data"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ccd"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" >
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg" >
+
+                <TableRow
+                    android:id="@+id/tableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/manifestIdLabelTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/manifest_id"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dde" />
+
+                    <TextView
+                        android:id="@+id/manifestIdTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/dummy"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dde"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/speditionIdLabelTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/spedition_id"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dde" />
+
+                    <TextView
+                        android:id="@+id/speditionIdTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/dummy"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dde"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

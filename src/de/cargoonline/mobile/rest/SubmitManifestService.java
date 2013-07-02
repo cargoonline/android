@@ -2,15 +2,11 @@ package de.cargoonline.mobile.rest;
   
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap; 
-
-import org.json.JSONArray;
- 
-import de.cargoonline.mobile.uiutils.CommonIntents;
-import android.app.IntentService; 
-import android.content.Context;
+import java.util.HashMap;  
+import org.json.JSONArray;  
+import de.cargoonline.mobile.MainMenuActivity;
+import android.app.IntentService;  
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 public class SubmitManifestService extends IntentService {
@@ -55,11 +51,10 @@ public class SubmitManifestService extends IntentService {
 	
 	public boolean submitMRNPositions(ArrayList<String> mrns, String speditionId, String manifestId) {
 	
-	    SharedPreferences prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
 		if (mrns == null || mrns.size() == 0) return false; // no mrns to submit, continue.
 	
-		String regId = prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
-		String user = prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");	 
+		String regId = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_REG_ID, "");
+		String user = MainMenuActivity.prefs.getString(ServerUtilities.PROPERTY_USER_NAME, "");	 
 		
 		// let's build params and trigger post request		
 		HashMap<String,String> params = new HashMap<String,String>();
@@ -85,7 +80,8 @@ public class SubmitManifestService extends IntentService {
 		for (int i=0; i < ServerUtilities.MAX_ATTEMPTS; i++) { 
 			
 			try {
-				ServerUtilities.post(WebExtClient.getInstance(this).getMobileUserRestService(), params);
+				int status = ServerUtilities.post(WebExtClient.getInstance(this).getMobileUserRestService(), params);
+				if (status == 200) return true;
 			} catch (IOException e) {
 	            // should retry only on unrecoverable errors (like HTTP error code 503).
 	            Log.e(TAG, "Failed to load manifest on attempt " + i + ":" + e);
@@ -103,7 +99,7 @@ public class SubmitManifestService extends IntentService {
 	            }
 	            // increase backoff exponentially
 	            backoff *= 2;
-	        } 
+	        } 			
 		}
 		return true;
 	}

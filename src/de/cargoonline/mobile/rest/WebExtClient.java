@@ -1,6 +1,5 @@
 package de.cargoonline.mobile.rest;   
-import de.cargoonline.mobile.uiutils.CommonIntents;
-
+import de.cargoonline.mobile.MainMenuActivity;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
@@ -23,6 +22,8 @@ public class WebExtClient {
 	public static final String KEY_MANIFEST_PWD = "manifestPwd";
 	public static final String KEY_HOSTNAME = "hostname";
 	public static final String KEY_NO_CONNECTION = "noConnection";
+	public static final String KEY_INPUT_ERROR = "inputError";
+	public static final String KEY_WAITING = "waiting";
 	
 	public static final String KEY_REQUEST = "REQUEST";
 	public static final String KEY_RESPONSE = "RESPONSE";
@@ -31,13 +32,14 @@ public class WebExtClient {
 	public static final String KEY_REQUEST_REGISTER = "MOBILE_REGISTER";
 	public static final String KEY_REQUEST_UNREGISTER = "MOBILE_UNREGISTER";
 	public static final String KEY_REQUEST_SUBMIT = "MOBILE_SUBMIT";
+	public static final String KEY_REQUEST_EDIT_FLIGHT = "MOBILE_EDIT_FLIGHT";
 	private SharedPreferences prefs;
 	private String lastHostname;
 	
 	private static WebExtClient instance; 
 		
 	private WebExtClient(Context c) { 
-		prefs = c.getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
+		prefs = c.getSharedPreferences(MainMenuActivity.PREF_STORE, Context.MODE_PRIVATE);
 		lastHostname = prefs.getString(KEY_HOSTNAME, DEFAULT_HOST);
 	} 
 	 

@@ -3,16 +3,22 @@ package de.cargoonline.mobile.manifest;
 import java.util.ArrayList;
 
 import de.cargoonline.mobile.R;
+import de.cargoonline.mobile.rest.ManifestDataService;
+import de.cargoonline.mobile.rest.WebExtClient;
 import de.cargoonline.mobile.uiutils.AlertDialogManager;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;  
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton.OnCheckedChangeListener; 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.BaseExpandableListAdapter;
@@ -20,7 +26,6 @@ import android.widget.BaseExpandableListAdapter;
 public class ManifestListAdapter extends BaseExpandableListAdapter  {
 	
 	private static final String TAG = "CO ManifestListAdapter";
-	
 	private Context context; 
 	int layoutResourceId;    
 	private ArrayList<ArrayList<ManifestItem>> mrnPositions;
@@ -69,10 +74,12 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
        
         ImageView iv = (ImageView) convertView.findViewById(R.id.mrn_status);
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.mrn_cb);
-    	Integer statusImg = mrnItem.getStatusImg();
-    	if (statusImg != null) { // MRN already committed, has state
-    		iv.setImageResource(statusImg);
-    		cb.setVisibility(View.GONE);
+    	String detailInfoFromServer = mrnItem.getMrnDetailsFromServer(); 
+    	boolean hasDetails = detailInfoFromServer != null && !detailInfoFromServer.equals("");
+    	Integer statusImg = hasDetails ? R.drawable.red : mrnItem.getStatusImg();
+    	 
+    	if (statusImg > 0) { // MRN already committed, has state
+    		iv.setImageResource(statusImg); 
     		iv.setVisibility(View.VISIBLE); 
     		convertView.setOnClickListener(new OnClickListener() {  
 	            public void onClick(View v) { 
@@ -80,49 +87,56 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
 	            }  
 	        }); 
     	} else {  
+    		iv.setVisibility(View.GONE); 
+    	}  
+    	
+    	if (mrnItem.getStatus() > 0) 
+     		cb.setVisibility(View.INVISIBLE);
+    	else { 
     		selectedFreeMrns.add(mrnItem.getMrnNumber()); 
     		cb.setVisibility(View.VISIBLE);
     		cb.setTag(mrnItem);
     		cb.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					 try {
-						 ManifestMRNPosition mrnItem = (ManifestMRNPosition) buttonView.getTag();
-						 if (isChecked) selectedFreeMrns.add(mrnItem.getMrnNumber());
-						 else selectedFreeMrns.remove(mrnItem.getMrnNumber());  
-						 activity.checkButtonState();
-					 } catch (Exception e) {
-						 Log.e(TAG, "error: unable to check free mrn!");
-					 }
-					
-				}});
-    		iv.setVisibility(View.GONE); 
-    	}  
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				 try {
+					 ManifestMRNPosition mrnItem = (ManifestMRNPosition) buttonView.getTag();
+					 if (isChecked) selectedFreeMrns.add(mrnItem.getMrnNumber());
+					 else selectedFreeMrns.remove(mrnItem.getMrnNumber());  
+					 activity.checkButtonState();
+				 } catch (Exception e) {
+					 Log.e(TAG, "error: unable to check free mrn!");
+				 }
+				
+			}}); 
+    	}
 		activity.checkButtonState();
         return convertView;
     }
    
     
     public void showMRNdetails(View v) {   
-        CheckBox cb = (CheckBox) v.findViewById(R.id.mrn_cb);
-        if (cb.getVisibility() == View.VISIBLE) return; // no details for free MRNs
+        ImageView iv = (ImageView) v.findViewById(R.id.mrn_status);
+        if (iv.getVisibility() == View.GONE) return; // no details for free MRNs
           
         ManifestMRNPosition mrnItem = getMRNFromView(v); 
         if (mrnItem == null) return;
 
-    	Integer mrnDetails = mrnItem.getStatusDetails();
+    	Context c = v.getContext();
+    	
+        String mrnDetails = mrnItem.getMrnDetailsFromServer();
+        if (mrnDetails == null || mrnDetails.equals("")) 
+        	mrnDetails = c.getString(mrnItem.getDefaultStatusDetails());
+        
     	String mrnTitle = mrnItem.getMrnNumber();
     	Integer mrnAlertIcon = mrnItem.getAlertSymbol();
     	
-    	if (mrnDetails == null || mrnTitle == null || mrnAlertIcon == null) return;
+    	if (mrnDetails == null || mrnTitle == null) return;
     	
-    	Context c = v.getContext();
     	alert.showAlertDialog(
-    			c.getString(R.string.mrn_details),
-    			c.getString(R.string.mrn_no)+"\n"+mrnTitle + "\n\n"
-    			+ c.getString(R.string.state)+"\n"+c.getString(mrnDetails), 
-    			mrnAlertIcon);
-    	 
+    			mrnTitle,
+    			mrnDetails, 
+    			mrnAlertIcon); 
     }
     
     private ManifestMRNPosition getMRNFromView(View v) {
@@ -167,8 +181,9 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
     }
  
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView,  ViewGroup parent) {
-        ManifestItem group = getGroupInfos(groupPosition);
+    public View getGroupView(final int groupPosition, boolean isExpanded, View convertView,  ViewGroup parent) {
+        final ManifestItem group = getGroupInfos(groupPosition);
+   
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -178,11 +193,38 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
         ((TextView) convertView.findViewById(R.id.tv_flightno)).setText(group.getFlightNumber());
         ((TextView) convertView.findViewById(R.id.tv_flightloc)).setText(group.getFlightLocation());
         
+        ImageButton editFlightButton = (ImageButton) convertView.findViewById(R.id.editFlightButton);
+        editFlightButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent arg1) {
+				v.setBackgroundResource(R.drawable.button_bg_red);
+				return false;
+			}        	
+        }); 
+        editFlightButton.setOnClickListener(new OnClickListener() { 
+        	@Override
+			public void onClick(View v) { 
+        		startEditFlightActivity(v.getContext(), groupPosition, group);				
+        		v.setBackgroundResource(R.drawable.button_bg_pressed);	
+			} 
+        });
+        
         ArrayList<ManifestItem> mrnsForCurrentAwb = mrnPositions.get(groupPosition);
         int stateDependentBackgroundResource = ManifestItem.getMostCriticalStateResource(mrnsForCurrentAwb);
         
         convertView.setBackgroundResource(stateDependentBackgroundResource);
+        convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) { 
+				activity.toggleExpanded(groupPosition);
+			}});
+        
         return convertView;
+    }
+    
+    public void setExpanded(int pos) {
+    	activity.toggleExpanded(pos);
     }
 
     @Override
@@ -198,5 +240,16 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
     public ArrayList<String> getSelectedPositions() {
     	return selectedFreeMrns;
     } 
+    
+    public void startEditFlightActivity(Context c, int position, ManifestItem group) {
+    	Intent i = new Intent(c, EditFlightActivity.class);
+		i.putExtra(ManifestDataService.KEY_AWB_NO[1], group.getAwbNumber());
+		i.putExtra(ManifestDataService.KEY_AWB_POSITION, position);		
+		i.putExtra(ManifestDataService.KEY_FLIGHT_NO, group.getFlightNumber());
+		i.putExtra(ManifestDataService.KEY_FLIGHT_LOCATION, group.getFlightLocation());
+		i.putExtra(WebExtClient.KEY_MANIFEST_ID, group.getManifestId());
+		i.putExtra(WebExtClient.KEY_SPEDITION_ID, group.getSpeditionId());
+		c.startActivity(i); 
+    }
   
 }

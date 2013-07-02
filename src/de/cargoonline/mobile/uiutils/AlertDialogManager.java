@@ -29,7 +29,7 @@ public class AlertDialogManager {
          
         // Setting Dialog Message
         alertDialog.setMessage(message);
- 
+        
 
         // Setting alert dialog icon 
         if (statusImg != null)

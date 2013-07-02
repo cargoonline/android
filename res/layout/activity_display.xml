@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg"
+    android:background="#112"
+    android:gravity="center_vertical"
     android:orientation="vertical" >
 
 	<LinearLayout 
@@ -11,13 +12,16 @@
 	    android:background="@drawable/list_group_semi"
 	    android:orientation="horizontal" >
 
-		<ImageView
-		    android:id="@+id/imageView1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:layout_marginLeft="7dp"
-		    android:contentDescription="@string/none"
-		    android:src="@drawable/ic_launcher" />
+		<ImageButton
+		    android:id="@+id/submitButton"
+		    android:layout_width="40dp"
+		    android:layout_height="40dp"
+		    android:layout_gravity="center"
+		    android:layout_marginLeft="10dp"
+		    android:layout_marginRight="5dp"
+		    android:background="@drawable/button_bg_pressed"		    
+		    android:src="@drawable/ic_menu_refresh" 
+		    android:contentDescription="@string/none"/>
 
 		<LinearLayout
 		    android:id="@+id/manifest_header_col2"
@@ -31,11 +35,12 @@
 			    android:id="@+id/TextView05"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
+			    android:layout_marginTop="3dp"
 			    android:gravity="center_vertical"
 			    android:padding="2dp"
 			    android:text="@string/manifest_id"
-			    android:textColor="#235"
-			    android:textSize="15sp"
+			    android:textColor="#112"
+			    android:textSize="14sp"
 			    android:textStyle="bold" />
 			
 			<TextView
@@ -45,8 +50,8 @@
 			    android:gravity="center_vertical"
 			    android:padding="2dp"
 			    android:text="@string/spedition"
-			    android:textColor="#235"
-			    android:textSize="15sp"
+			    android:textColor="#112"
+			    android:textSize="14sp"
 			    android:textStyle="bold" />
 		</LinearLayout>
 
@@ -61,24 +66,25 @@
 			<TextView
 			    android:id="@+id/listheader_manifest_id"
 			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
+			    android:layout_height="20dp"
+			    android:layout_marginTop="4dp"
 			    android:gravity="center_vertical"
 			    android:padding="2dp"
 			    android:textColor="#235"
-			    android:textSize="15sp"
-			    android:textStyle="bold"
-			    android:textIsSelectable="true" />
+			    android:textIsSelectable="true"
+			    android:textSize="12sp"
+			    android:textStyle="bold" />
 
 			<TextView
 			    android:id="@+id/listheader_spedition_name"
 			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
+			    android:layout_height="20dp"
 			    android:gravity="center_vertical"
 			    android:padding="2dp"
 			    android:textColor="#235"
-			    android:textSize="15sp"
-			    android:textStyle="bold" 
-			    android:textIsSelectable="true" />
+			    android:textIsSelectable="true"
+			    android:textSize="12sp"
+			    android:textStyle="bold" />
 			
 			<TextView
 			    android:id="@+id/listheader_eori_no"
@@ -87,9 +93,9 @@
 			    android:gravity="center_vertical"
 			    android:padding="2dp"
 			    android:textColor="#235"
-			    android:textSize="15sp"
-			    android:textStyle="bold" 
-			    android:textIsSelectable="true" />
+			    android:textIsSelectable="true"
+			    android:textSize="12sp"
+			    android:textStyle="bold" />
 
 		</LinearLayout>
 
@@ -107,53 +113,48 @@
 	
 	</LinearLayout>
 
-	<LinearLayout
+	<ExpandableListView
+	    android:id="@+id/manifest_list"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:scrollbars="none"
+	    android:visibility="visible" >
+	</ExpandableListView>
+
+	<FrameLayout
 	    android:id="@+id/manifest_waiting"
 	    android:layout_width="fill_parent"
-	    android:layout_height="77dp"
-	    android:layout_marginLeft="20dp"
-	    android:layout_marginRight="20dp"
-	    android:layout_weight="0.42"
-	    android:orientation="horizontal" >
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/button_bg_red"
+	    android:padding="10dp" >
 
-	    <ProgressBar
-	        android:id="@+id/progressBar1"
-	        android:layout_width="wrap_content"
+	    <LinearLayout
+	        android:id="@+id/manifest_waiting_inner"
+	        android:layout_width="255dp"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical" />
+	        android:layout_gravity="center"
+	        android:orientation="horizontal" >
 
-	    <TextView
-	        android:id="@+id/manifest_waiting_text"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical"
-	        android:gravity="center_vertical"
-	        android:padding="10dp"
-	        android:text="@string/commit_in_process"
-	        android:textAppearance="?android:attr/textAppearanceMedium"
-	        android:textColor="#FFFFFF"
-	        android:textIsSelectable="true"
-	        android:textStyle="bold" />
-	</LinearLayout>
-   
-    <ExpandableListView
-        android:id="@+id/manifest_list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.74"
-        android:scrollbars="none"
-        android:visibility="gone" >
+	        <ProgressBar
+	            android:id="@+id/progressBar1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical" />
 
-    </ExpandableListView> 
-   
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/button_bg_pressed"
-        android:layout_margin="10dp"
-        android:text="@string/gestellen" 
-        android:onClick="startRequest"
-        android:textColor="#fff"/>
+	        <TextView
+	            android:id="@+id/manifest_waiting_text"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center_vertical"
+	            android:layout_marginLeft="10dp"
+	            android:gravity="center_vertical"
+	            android:text="@string/commit_in_process"
+	            android:textAppearance="?android:attr/textAppearanceMedium"
+	            android:textColor="#ccd"
+	            android:textIsSelectable="true"
+	            android:textSize="14sp" />
+	    </LinearLayout>
+	</FrameLayout>
 
 </LinearLayout>

@@ -2,9 +2,8 @@ package de.cargoonline.mobile.rest;
  
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
-
-import de.cargoonline.mobile.uiutils.CommonIntents;
+import java.util.Map; 
+import de.cargoonline.mobile.MainMenuActivity;
 import android.app.IntentService; 
 import android.content.Context;
 import android.content.Intent;
@@ -18,12 +17,14 @@ public class ManifestDataService extends IntentService {
 	public final static String[] KEY_EORI_NO = {"eori_nr","nl_nr"};
 	public final static String[] KEY_AWB_NO = {"mawb_prefix","mawb_nr"};
 	public final static String KEY_MRN_NO = "mrn_nr";
+	public final static String KEY_DETAIL_TEXT = "detail_txt";
 	public final static String KEY_FLIGHT_NO = "extinf_befoerderm_kz";
 	public final static String KEY_FLIGHT_LOCATION = "extinf_befoerderm_ladeort";
 	public final static String KEY_STATUS = "b_status";
 	public final static String KEY_SPEDITION_NAME = "spedition_name";
 	public final static String KEY_POSITIONS = "positions";
-
+	public final static String KEY_AWB_POSITION = "awb_position";
+	
 	private String manifestID;
 	private String speditionID;
 	private String manifestPwd;
@@ -34,7 +35,7 @@ public class ManifestDataService extends IntentService {
 	  
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		SharedPreferences prefs = getSharedPreferences(CommonIntents.PREF_STORE, Context.MODE_PRIVATE);
+		SharedPreferences prefs = getSharedPreferences(MainMenuActivity.PREF_STORE, Context.MODE_PRIVATE);
 		
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction(intent.getStringExtra(WebExtClient.KEY_REQUEST));

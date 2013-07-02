@@ -135,7 +135,7 @@ public final class ServerUtilities {
      *
      * @throws IOException propagated from POST.
      */
-    public static void post(String endpoint, Map<String, String> params)
+    public static int post(String endpoint, Map<String, String> params)
             throws IOException {    
          
         URL url;
@@ -166,6 +166,8 @@ public final class ServerUtilities {
             if (status != 200) {
               throw new IOException("Post failed with error code " + status);
             }
+            return status;
+            
         } finally {
             if (conn != null) {
                 conn.disconnect();
