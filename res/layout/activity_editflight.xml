@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbars="vertical"
+    tools:context=".EditFlightActivity" >
+
+    <TextView
+        android:id="@+id/tv_editFlightTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/list_group_semi"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/dbh_s"
+        android:gravity="center_vertical|center_horizontal"
+        android:maxLines="2"
+        android:padding="10dp"
+        android:text="@string/edit_flight_title"
+        android:textAlignment="center"
+        android:textColor="#112"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_gravity="top"
+        android:layout_weight="0.54" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp" >
+
+                <TextView
+                    android:id="@+id/tv_editflight_awb_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/awb_no"
+                    android:textColor="#dde"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_editflight_awb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/dummy"
+                    android:textColor="#dde"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_editflight_no_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flight_no"
+                android:textColor="#dde" />
+
+            <EditText
+                android:id="@+id/et_editflight_no"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#dde"
+                android:ems="10"
+                android:inputType="text"
+                android:padding="3dp"
+                android:textColor="#235"
+                android:textColorLink="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_editflight_location_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/flight_location"
+                android:textColor="#dde"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_editflight_location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="#dde"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:padding="3dp"
+                android:textColor="#235"
+                android:textColorLink="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/editFlightSubmitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_bg_pressed"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/edit_flight_submit_title"
+                android:textColor="#dde" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

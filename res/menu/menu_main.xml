@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >  
+   
+    <item android:id="@+id/menu_manifest"
+        
+          android:icon="@drawable/ic_menu_find_holo_dark"
+          android:title="@string/options_manifest" >
+        <!-- "manifest" submenu -->
+    	<menu>
+		    <item
+		        android:id="@+id/menu_last_manifest"
+		        android:title="@string/welcome_show_last_manifest"/>
+            <item
+		        android:id="@+id/menu_scan"
+		        android:title="@string/welcome_start_scanner"/> 
+		</menu>
+	</item>      
+    
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_menu_info_details"
+        android:title="@string/options_about"/>
+    
+    <item
+        android:id="@+id/menu_exit"
+        android:icon="@drawable/ic_menu_close_clear_cancel"
+        android:title="@string/options_exit"/>
+    
+     <item
+        android:id="@+id/menu_unregister"
+        android:icon="@drawable/ic_menu_blocked_user"
+        android:title="@string/options_unregister"/>
+    
+</menu> 
