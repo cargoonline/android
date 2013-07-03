@@ -3,7 +3,6 @@ package de.cargoonline.mobile.uiutils;
 import android.content.Context;
 import android.os.PowerManager;
  
-
 // TODO 
 // use window manager flag FLAG_KEEP_SCREEN_ON instead of deprecated methods below
 // -> better power management!

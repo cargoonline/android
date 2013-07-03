@@ -15,13 +15,13 @@ public class WebExtClient {
 	public static final String PROTOCOL = "http";
 	public static final String SERVICE_ROOT_DIR = "/web_ext/";
 	public static final String MOBILE_DIR = "mobile/";
-	public static final String MANIFEST_SERVICE = "mobile_manifest.php"; 
  
 	public static final String KEY_MANIFEST_ID = "manifestID";
 	public static final String KEY_SPEDITION_ID = "speditionID";
 	public static final String KEY_MANIFEST_PWD = "manifestPwd";
 	public static final String KEY_HOSTNAME = "hostname";
 	public static final String KEY_NO_CONNECTION = "noConnection";
+	public static final String KEY_NO_REGISTRATION = "noRegistrationPossible";
 	public static final String KEY_INPUT_ERROR = "inputError";
 	public static final String KEY_WAITING = "waiting";
 	
@@ -64,11 +64,7 @@ public class WebExtClient {
     public String getServerRoot() {
     	return PROTOCOL + "://" + getLastHostname() + SERVICE_ROOT_DIR;
     }
-	 
-    public String getManifestRestService() {
-    	return getServerRoot()+MANIFEST_SERVICE;
-    }
-    	 
+	   
     public String getMobileUserRestService() {
     	return getServerRoot()+MOBILE_DIR;
     } 

@@ -8,10 +8,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent; 
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
-
-import com.google.android.gcm.GCMBaseIntentService; 
-
+import android.util.Log; 
+import com.google.android.gcm.GCMBaseIntentService;  
+import de.cargoonline.mobile.R; 
 import de.cargoonline.mobile.push.CommonUtilities;
 import de.cargoonline.mobile.rest.ServerUtilities; 
 

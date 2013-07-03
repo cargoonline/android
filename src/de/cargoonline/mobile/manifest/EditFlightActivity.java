@@ -1,9 +1,9 @@
 package de.cargoonline.mobile.manifest;
 
-import de.cargoonline.mobile.EditFlightService;
 import de.cargoonline.mobile.MainMenuActivity;
 import de.cargoonline.mobile.R; 
 import de.cargoonline.mobile.rest.COServiceReceiver;
+import de.cargoonline.mobile.rest.EditFlightService;
 import de.cargoonline.mobile.rest.ManifestDataService;
 import de.cargoonline.mobile.rest.WebExtClient;
 import android.content.Intent;

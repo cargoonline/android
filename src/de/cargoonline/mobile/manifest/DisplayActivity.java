@@ -47,7 +47,7 @@ public class DisplayActivity extends MainMenuActivity {
         TextView getSpeditionName = (TextView) findViewById(R.id.listheader_spedition_name);
         TextView tvManifestId = (TextView) findViewById(R.id.listheader_manifest_id); 
         refreshRequired = false;
-        updateRunning = bundle.getBoolean(WebExtClient.KEY_REQUEST_EDIT_FLIGHT);
+        updateRunning = bundle != null ? bundle.getBoolean(WebExtClient.KEY_REQUEST_EDIT_FLIGHT) : false;
         
         // fill list
         dataProvider = ManifestDataProvider.create(updateRunning ? null : bundle);         
@@ -98,7 +98,8 @@ public class DisplayActivity extends MainMenuActivity {
 	public boolean onCreateOptionsMenu(Menu menu) { 
     	super.onCreateOptionsMenu(menu);  
     	menu.findItem(R.id.menu_manifest).setVisible(false);
-    	menu.findItem(R.id.menu_unregister).setVisible(false);
+    	if (StartActivity.DEBUG_ALLOW_UNREGISTER) 
+    		menu.findItem(R.id.menu_unregister).setVisible(false);
     	
         commitItem = menu.add(R.string.gestellen);
         commitItem.setIcon(R.drawable.ic_menu_upload);

@@ -77,7 +77,7 @@ public class ManifestDataService extends IntentService {
 		for (int i=0; i < ServerUtilities.MAX_ATTEMPTS; i++) { 
 			
 			try {
-				return ServerUtilities.get(WebExtClient.getInstance(this).getManifestRestService(), params);
+				return ServerUtilities.get(WebExtClient.getInstance(this).getMobileUserRestService(), params);
 			} catch (IOException e) {
 	            // should retry only on unrecoverable errors (like HTTP error code 503).
 	            Log.e(TAG, "Failed to load manifest on attempt " + i + ":" + e);

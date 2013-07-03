@@ -1,11 +1,9 @@
-package de.cargoonline.mobile;
+package de.cargoonline.mobile.rest;
 
 import java.io.IOException;
 import java.util.HashMap;
-import de.cargoonline.mobile.rest.COServiceReceiver;
-import de.cargoonline.mobile.rest.ManifestDataService;
-import de.cargoonline.mobile.rest.ServerUtilities;
-import de.cargoonline.mobile.rest.WebExtClient;
+
+import de.cargoonline.mobile.MainMenuActivity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;

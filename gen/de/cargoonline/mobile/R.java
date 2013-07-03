@@ -54,7 +54,6 @@ public final class R {
     }
     public static final class id {
         public static final int TextView05=0x7f070003;
-        public static final int action_settings=0x7f070034;
         public static final int cameraPreview=0x7f070033;
         public static final int editFlightButton=0x7f070032;
         public static final int editFlightSubmitButton=0x7f070017;
@@ -76,12 +75,12 @@ public final class R {
         public static final int manifest_waiting=0x7f07000b;
         public static final int manifest_waiting_inner=0x7f07000c;
         public static final int manifest_waiting_text=0x7f07000e;
-        public static final int menu_about=0x7f070038;
-        public static final int menu_exit=0x7f070039;
-        public static final int menu_last_manifest=0x7f070036;
-        public static final int menu_manifest=0x7f070035;
-        public static final int menu_scan=0x7f070037;
-        public static final int menu_unregister=0x7f07003a;
+        public static final int menu_about=0x7f070037;
+        public static final int menu_exit=0x7f070038;
+        public static final int menu_last_manifest=0x7f070035;
+        public static final int menu_manifest=0x7f070034;
+        public static final int menu_scan=0x7f070036;
+        public static final int menu_unregister=0x7f070039;
         public static final int mrn_cb=0x7f070029;
         public static final int mrn_list_item=0x7f070028;
         public static final int mrn_status=0x7f07002c;
@@ -123,8 +122,7 @@ public final class R {
         public static final int main=0x7f030006;
     }
     public static final class menu {
-        public static final int edit_flight=0x7f060000;
-        public static final int menu_main=0x7f060001;
+        public static final int menu_main=0x7f060000;
     }
     public static final class string {
         public static final int about_dialog_text=0x7f050048;

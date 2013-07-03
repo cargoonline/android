@@ -93,7 +93,7 @@ public final class ServerUtilities {
         }
         String message = context.getString(R.string.server_register_error,  MAX_ATTEMPTS);
         Log.e(TAG, message);
-        //CommonUtilities.displayMessage(context, message); //TODO would send push notification after registering
+        //CommonUtilities.displayMessage(context, message); // would send push notification after registering
     }
  
     /**
@@ -202,17 +202,16 @@ public final class ServerUtilities {
         HttpGet httpget = new HttpGet(url + "?" + body);  
         HttpResponse response;
         InputStream instream = null;
+    	String result = null;
         
         try {
             response = httpclient.execute(httpget); 
             Log.i(TAG,response.getStatusLine().toString());
-  
+            
             HttpEntity entity = response.getEntity();  
-            if (entity != null) {
-  
+            if (entity != null) {            	 
                 instream = entity.getContent();
-                String result = convertStreamToString(instream);                 
-                return result;
+                result = convertStreamToString(instream);   
             }
         } catch (ClientProtocolException e) { 
             throw new IOException("Client Protocol Error");
@@ -222,7 +221,7 @@ public final class ServerUtilities {
             	instream.close();
             }
         }
-		return null;  
+		return result;  
       }
     
     private static String buildHttpRequestBody(Map<String,String> params) {
@@ -259,6 +258,7 @@ public final class ServerUtilities {
                 e.printStackTrace();
             }
         }
-        return sb.toString();
+        String s = sb.toString();
+        return s;
     } 
 }

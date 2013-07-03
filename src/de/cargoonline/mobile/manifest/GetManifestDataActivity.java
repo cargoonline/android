@@ -38,7 +38,9 @@ public class GetManifestDataActivity extends MainMenuActivity {
         manifestIdTextView = (TextView) findViewById(R.id.manifestIdTextView);
         speditionIdTextView = (TextView) findViewById(R.id.speditionIdTextView); 
         
-        if (getQRData(getIntent().getExtras())) { 
+        Bundle bundle = getIntent().getExtras();
+        
+        if (getQRData(bundle)) { 
         	manifestIdTextView.setText(manifestID);
         	speditionIdTextView.setText(speditionID);   
         } else { 
@@ -49,7 +51,7 @@ public class GetManifestDataActivity extends MainMenuActivity {
         	Toast.makeText(this, R.string.invalid_scan_result_error, Toast.LENGTH_LONG).show(); 
         }
     	
-		if (!isRegisteredOnDevice()) {
+		if (!isRegisteredOnDevice() && !bundle.getBoolean(WebExtClient.KEY_NO_REGISTRATION)) {
         	Log.d(TAG, "User is not even registered on the device. Starting registration mask.");
     		Intent i = new Intent(this, RegisterActivity.class);
     		i.putExtra(WebExtClient.KEY_MANIFEST_ID, manifestID);

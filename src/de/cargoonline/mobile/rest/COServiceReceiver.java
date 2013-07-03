@@ -46,7 +46,8 @@ public class COServiceReceiver extends BroadcastReceiver {
 	 	    	target.startManifestActivity(
 		 	 			manifestId,
 		 	 			intent.getStringExtra(WebExtClient.KEY_SPEDITION_ID),
-		 	 			intent.getStringExtra(WebExtClient.KEY_MANIFEST_PWD));
+		 	 			intent.getStringExtra(WebExtClient.KEY_MANIFEST_PWD), 
+		 	 			false);
 	 	    } else {
 	 	    	// auto registration: just start next service
 	 	    	target.startManifestDataService(COServiceReceiver.ACTION_LOAD); 

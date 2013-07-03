@@ -28,6 +28,8 @@
      <item
         android:id="@+id/menu_unregister"
         android:icon="@drawable/ic_menu_blocked_user"
-        android:title="@string/options_unregister"/>
+        android:title="@string/options_unregister" 
+        android:visible="false"/>
+  
     
 </menu> 

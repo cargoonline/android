@@ -50,13 +50,7 @@ public class RegisterActivity extends MainMenuActivity {
     	startActivity(i);
         finish();
         return;
-    }
-    
-    @Override
-    protected void onDestroy() {
-        unregisterReceiver(receiver);
-        super.onDestroy();
-    }
+    } 
     
     @Override
     protected void onPause() {
@@ -108,12 +102,15 @@ public class RegisterActivity extends MainMenuActivity {
 					Toast.makeText(ctx, R.string.register_enter_name_reminder, Toast.LENGTH_LONG).show();
 				
 				} else if (regid.equals("")) { 
+					// user unable to register at GCM. try to load manifest without registration (no push messages)
 					Toast.makeText(ctx, R.string.register_gcm_warning, Toast.LENGTH_LONG).show(); 
 					startManifestActivity(
 			 			 manifestBundle.getString(WebExtClient.KEY_MANIFEST_ID),
 			 			 manifestBundle.getString(WebExtClient.KEY_SPEDITION_ID),
-			 			 manifestBundle.getString(WebExtClient.KEY_MANIFEST_PWD));
+			 			 manifestBundle.getString(WebExtClient.KEY_MANIFEST_PWD), 
+			 			 true);
 				} else {
+					// start registration at web-ext in background
 					setLayout(true); 
 					
 					String manifestId = manifestBundle.getString(WebExtClient.KEY_MANIFEST_ID);

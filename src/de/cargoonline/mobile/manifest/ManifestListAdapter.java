@@ -192,27 +192,33 @@ public class ManifestListAdapter extends BaseExpandableListAdapter  {
         ((TextView) convertView.findViewById(R.id.tv_awb)).setText(group.getAwbNumber());
         ((TextView) convertView.findViewById(R.id.tv_flightno)).setText(group.getFlightNumber());
         ((TextView) convertView.findViewById(R.id.tv_flightloc)).setText(group.getFlightLocation());
-        
         ImageButton editFlightButton = (ImageButton) convertView.findViewById(R.id.editFlightButton);
-        editFlightButton.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent arg1) {
-				v.setBackgroundResource(R.drawable.button_bg_red);
-				return false;
-			}        	
-        }); 
-        editFlightButton.setOnClickListener(new OnClickListener() { 
-        	@Override
-			public void onClick(View v) { 
-        		startEditFlightActivity(v.getContext(), groupPosition, group);				
-        		v.setBackgroundResource(R.drawable.button_bg_pressed);	
-			} 
-        });
         
-        ArrayList<ManifestItem> mrnsForCurrentAwb = mrnPositions.get(groupPosition);
-        int stateDependentBackgroundResource = ManifestItem.getMostCriticalStateResource(mrnsForCurrentAwb);
+        ArrayList<ManifestItem> mrns = mrnPositions.get(groupPosition);
+        editFlightButton.setVisibility(View.VISIBLE);
+        if (ManifestItem.containsFreeMRN(mrns)) {
+        	
+	        editFlightButton.setOnTouchListener(new OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent arg1) {
+					v.setBackgroundResource(R.drawable.button_bg_red);
+					return false;
+				}        	
+	        }); 
+	        editFlightButton.setOnClickListener(new OnClickListener() { 
+	        	@Override
+				public void onClick(View v) { 
+	        		startEditFlightActivity(v.getContext(), groupPosition, group);				
+	        		v.setBackgroundResource(R.drawable.button_bg_pressed);	
+				} 
+	        });
+        } else {
+            editFlightButton.setVisibility(View.INVISIBLE);
+        }        
         
-        convertView.setBackgroundResource(stateDependentBackgroundResource);
+        convertView.setBackgroundResource(
+        		ManifestItem.getMostCriticalStateResource(mrns)
+        );
         convertView.setOnClickListener(new OnClickListener() {
 
 			@Override

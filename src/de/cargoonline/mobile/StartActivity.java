@@ -24,8 +24,10 @@ import android.widget.Toast;
 import com.google.android.gcm.GCMRegistrar;
 
 public class StartActivity extends MainMenuActivity {
- 
-	private static boolean DEBUG_DEVICE_WITHOUT_REGISTRATION = false; 
+
+	public final static boolean DEBUG_DEVICE_WITHOUT_REGISTRATION = false; 
+	public final static boolean DEBUG_ALLOW_UNREGISTER = false; 
+	
 	
     static { System.loadLibrary("iconv");  } 
 
@@ -100,8 +102,7 @@ public class StartActivity extends MainMenuActivity {
             	GCMRegistrar.register(this, CommonUtilities.SENDER_ID); 
             }
     	} else {
-    		// PUSH Service not available (old devices without google account)
-    		// register at web-ext only, without regid.
+    		// PUSH Service not available (old devices without google account) 
     		// App/User has to pull status 
     		Log.d(TAG, "GCM not available on this device! Continuing without registration.");
     		

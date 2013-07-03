@@ -50,6 +50,11 @@ public abstract class MainMenuActivity extends Activity {
 	 public boolean onCreateOptionsMenu(Menu menu) { 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        
+        if (StartActivity.DEBUG_ALLOW_UNREGISTER) {
+        	MenuItem unregisterItem = (MenuItem) this.findViewById(R.id.menu_unregister);
+        	unregisterItem.setVisible(true);
+        }
         return true;
     }
 	    
@@ -69,11 +74,12 @@ public abstract class MainMenuActivity extends Activity {
             case R.id.menu_about:
                 showAboutDialog();
                 return true;
-                
+              
+            
             case R.id.menu_unregister: 
-            	unregister();
+            	if (StartActivity.DEBUG_ALLOW_UNREGISTER) unregister();
                 return true;
-           
+            
             case R.id.menu_exit:
             	ActivityRegistry.finishAll();
             	return true;
@@ -98,7 +104,7 @@ public abstract class MainMenuActivity extends Activity {
 			String lastSpedId = prefs.getString(WebExtClient.KEY_SPEDITION_ID, "");
 			String lastManifestPwd = prefs.getString(WebExtClient.KEY_MANIFEST_PWD, "");
 			if (!lastManifestId.equals("") && !lastSpedId.equals("") && !lastManifestPwd.equals("")) {
-				startManifestActivity(lastManifestId, lastSpedId, lastManifestPwd); 
+				startManifestActivity(lastManifestId, lastSpedId, lastManifestPwd, false); 
 				return true;
 			} else 
 				return false;
@@ -133,11 +139,12 @@ public abstract class MainMenuActivity extends Activity {
 			startActivity(i);
 	    }
 	    
-	    public void startManifestActivity(String manifestId, String speditionId, String manifestPwd) {
+	    public void startManifestActivity(String manifestId, String speditionId, String manifestPwd, boolean noRegistrationPossible) {
 	    	Intent i = new Intent(this, GetManifestDataActivity.class);
 			i.putExtra(WebExtClient.KEY_MANIFEST_ID, manifestId);
 	    	i.putExtra(WebExtClient.KEY_SPEDITION_ID, speditionId);
 			i.putExtra(WebExtClient.KEY_MANIFEST_PWD, manifestPwd); 
+			i.putExtra(WebExtClient.KEY_NO_REGISTRATION, noRegistrationPossible);
 			startActivity(i); 
 	    }
 	    

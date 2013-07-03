@@ -75,6 +75,16 @@ public class ManifestItem {
 		return ManifestDataProvider.create(null).getSpeditionId();
 	}  
 	
+	public static boolean containsFreeMRN(ArrayList<ManifestItem> mrns) {    	
+    	for (ManifestItem mrn : mrns) {  
+    		ManifestMRNPosition cur = (ManifestMRNPosition) mrn; 
+    		int status = cur.getStatus();
+    		if (status <= ManifestMRNPosition.MAX_FREE_STATE) 
+    			return true;
+    	}
+    	return false;
+	}
+	
 	public static int getMostCriticalStateResource(ArrayList<ManifestItem> mrns) {
 	    	boolean hasYellowState = false;
 	    	boolean hasGreenState = false;
