@@ -1,0 +1,2 @@
+- unregister --> nach dem registrieren wird manifest nicht mehr geladen
+- splash screen

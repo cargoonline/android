@@ -1,0 +1,30 @@
+Daten:
+
+SENDER ID = 516620497845
+API KEY = AIzaSyBzG887annN9_tBLC4tjh34X42ccM9lYNo
+String GCM_SENDER_ID = "516620497845"
+apk keystore passwort 3w2ba99! 
+USR TABLE: web_ext_mobile_users 
+-------------------------------
+TODO
+-------------------------------
+
+
+registrieren:
+- registrierungslose leute testen
+
+display manifest: 
+- detail fehler infos bei status rot mitliefern und anzeigen ( Info_kz = J, info_text=‘…‘, b_status= 25 und ext_status = 23.)
+- flugnr und ladeort ändern in detail view 
+- auto-refresh bei nicht push fähigen devices und bei wakeup
+
+gestellen:
+- status/daten sonderfälle testen so viel wie möglich
+- reaktion auf push notifications
+
+allgemein:
+
+- logcat warnings durchforsten
+- menütaste: zurück, aktualisieren, about, exit?
+- fehlerhandling warnmeldungen bei markierten stellen
+- ok button bei alerts
