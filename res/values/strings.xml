@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Cargo Online Mobile</string>
-    <string name="version_name">Version 1.0</string>
+    <string name="version_name">Version 1.1</string>
     <string name="ust_id">DE 159510182</string>
-    <string name="company">Cargo Online Software GmbH\nKurt-Schumacher-Allee 2\nD-28329 Bremen</string>
-    <string name="website">http://www.cargo-software.de/</string>
+    <string name="company">Cargo Online Software GmbH\nMartinistraße 47-49\nD-28195 Bremen</string>
+    <string name="website">http://www.cargo-online.de/</string>
     <string name="ust_id_title">USt-ID-Nr:</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_display">Cargo Online Mobile: Manifest</string>
